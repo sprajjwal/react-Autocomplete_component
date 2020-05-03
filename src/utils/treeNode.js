@@ -1,9 +1,10 @@
-class TreeNode {
+/* eslint-disable no-prototype-builtins */
+class InnerTreeNode {
   /**
   * Tree Node that will store data, whether the node is termina
   * and reference to the next node.abs
   */
-  constructor(char=null) {
+  constructor(char = null) {
     this.data = char;
     this.children = {}; // children are maintained as object
     this.terminal = false;
@@ -28,7 +29,7 @@ class TreeNode {
   getChild(ch) {
     /** returns the child node that has the given character
      * as data */
-    if (this.children.hasChild(ch)) {
+    if (this.children.hasOwnProperty(ch)) {
       return this.children[ch];
     }
     return null;
@@ -44,6 +45,7 @@ class TreeNode {
       throw ReferenceError;
     }
   }
+
 }
 
-export default TreeNode;
+module.exports = InnerTreeNode;
