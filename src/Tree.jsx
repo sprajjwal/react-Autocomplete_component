@@ -1,53 +1,50 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import InnerTree, { addCount } from './utils/Tree';
 
 class Tree extends Component {
   constructor(props) {
     super(props);
-    const { data } = this.props;
-    this.tree = new InnerTree(data);
+    const { data, name } = this.props;
+    localStorage.setItem(name, JSON.stringify({}));
+    this.tree = new InnerTree(name, data);
     this.state = {
-      word: '',
       items: [],
     };
     this.onChange = this.onChange.bind(this);
-    this.onClick = this.onClick.bind(this);
   }
 
   onChange(e) {
-    const stateItems = this.state.items;
+    const { items } = this.state;
     const prefix = e.target.value;
-    let items = [];
-    if (prefix !== '') {
-      if (stateItems.includes(prefix)) {
-        addCount(prefix);
+    const { validator, getInput, name } = this.props;
+    let newItems = [];
+    if (prefix !== '' && validator(prefix)) { // check if prefix isn't empty and passes validator
+      if (items.includes(prefix)) {
+        addCount(prefix, name);
+        getInput(prefix); // sends the selected prefix back to parent component
       } else {
-        items = this.tree.complete(prefix);
-        // eslint-disable-next-line react/no-unused-state
+        newItems = this.tree.complete(prefix);
       }
     }
-    this.setState({ items });
-    this.setState({ word: prefix });
+    this.setState({ items: newItems });
   }
 
-  onClick(e) {
-    console.log(e);
-  }
 
   render() {
     const { items } = this.state;
     // const options =
     return (
       <div>
-        <label>
-          <input
-            type="text"
-            list="data"
-            onChange={this.onChange}
-          />
-        </label>
+        <input
+          type="text"
+          list="data"
+          onChange={this.onChange}
+        />
         <datalist id="data">
-          {items.map((item, key) => <option key={key} value={item} onClick={this.onClick}/>)}
+          {items.map((item, key) => <option key={key} value={item} onClick={this.onClick} />)}
         </datalist>
       </div>
     );
