@@ -7,7 +7,6 @@ function getCount(prefix, name) {
   /** Returns the count of current node.
    */
   const obj = JSON.parse(localStorage.getItem(name));
-
   return obj.hasOwnProperty(prefix) ? Number(obj[prefix]) : 0;
 }
 
@@ -32,7 +31,6 @@ function addCount(prefix, name) {
   const obj = JSON.parse(localStorage.getItem(name));
   obj[prefix] = obj.hasOwnProperty(prefix) ? Number(obj[prefix]) + 1 : 1;
   localStorage.setItem(name, JSON.stringify(obj));
-
 }
 
 class InnerTree {
@@ -109,7 +107,7 @@ class InnerTree {
     const i = starterNode[1];
 
     if (curr === null) {
-      return Object.keys(completions).slice(0,5);
+      return Object.keys(completions).slice(0, 5);
     }
     if (curr.terminal === true) {
       completions[prefix.slice(0, i)] = getCount(prefix.slice(0, i), this.name);
@@ -117,7 +115,7 @@ class InnerTree {
     for (const key in curr.children) {
       traverse(curr.getChild(key), prefix.slice(0, i), completions, this.name);
     }
-    const items = Object.keys(completions).sort(function(a, b){return completions[a] - completions[b]});
+    const items = Object.keys(completions).sort((a, b) => completions[a] - completions[b]);
     return items.reverse().slice(0, 5);
   }
 }
