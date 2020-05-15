@@ -36,7 +36,7 @@ const styles = {
   },
 };
 
-class Tree extends Component {
+class Suggest extends Component {
   constructor(props) {
     super(props);
     const { data, name } = this.props;
@@ -55,7 +55,7 @@ class Tree extends Component {
   onChange(e) {
     const { items, word } = this.state;
     const prefix = e.target.value;
-    const { validator, getInput, name } = this.props;
+    const { validator, onChange, name } = this.props;
     let newItems = [];
     if (!validator(prefix)) {
       return;
@@ -63,7 +63,7 @@ class Tree extends Component {
     if (prefix !== '') { // check if prefix isn't empty and passes validator
       if (items.includes(prefix)) {
         addCount(prefix, name);
-        getInput(prefix); // sends the selected prefix back to parent component
+        onChange(prefix); // sends the selected prefix back to parent component
       } else {
         newItems = this.tree.complete(prefix);
       }
@@ -100,4 +100,4 @@ class Tree extends Component {
   }
 }
 
-export default Tree;
+export default Suggest;

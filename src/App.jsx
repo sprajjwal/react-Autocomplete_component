@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Tree from './Tree';
+import Suggest from './Suggest';
 
 const styles = {
   tree: {
@@ -28,12 +28,14 @@ function App() {
       <header className="App-header">
         {/* Component takes callback */}
         <div style={styles.tree}>
-          <Tree
+          {/* My Component here  */}
+          <Suggest
             name="a"
             data={items}
-            getInput={(prefix) => { console.log(prefix); }}
+            onChange={(prefix) => { console.log(prefix); }}
             validator={validator}
           />
+
         </div>
       </header>
     </div>
