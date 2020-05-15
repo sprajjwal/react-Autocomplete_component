@@ -1,7 +1,3 @@
-Features:
-1. validator
-2. onChange
-
 # WORD SUGGEST
 
 This is a reusable React Component that can be used straight up by copying over the Utils folder along with the Tree.jsx file.
