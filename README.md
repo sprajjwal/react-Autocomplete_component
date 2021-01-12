@@ -1,6 +1,6 @@
 # WORD SUGGEST
 
-This is a reusable React Component that can be used straight up by copying over the Utils folder along with the Tree.jsx file.
+This is a reusable React Component that can be used straight up by copying over the Utils folder along with the Suggest.jsx file.
 
 ## Features:
 
